@@ -1,0 +1,10 @@
+# ansible-playbook -i inventory tmos-bigip-as3.yml -v
+#
+---
+    - name: Deploy AS3 Apps
+      hosts: bigip_mgmt
+      gather_facts: false
+      connection: local
+      roles:
+       - tmos-as3-generate-token
+       - tmos-as3-apps

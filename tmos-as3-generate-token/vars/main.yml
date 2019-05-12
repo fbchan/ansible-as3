@@ -1,0 +1,6 @@
+---
+# vars file for tmos-as3-generate-token
+
+bigip_mgmt: "10.10.14.94"
+username: "admin"
+password: "admin"

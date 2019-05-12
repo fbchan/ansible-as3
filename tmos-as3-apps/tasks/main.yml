@@ -1,0 +1,53 @@
+---
+# tasks file for tmos-as3-apps
+
+# ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin
+
+- name: Build JSON payload
+  template: src={{app_template}}.j2 dest={{app_template}}.json
+
+- name: Deploy AS3 template
+  uri:
+   url: "https://{{bigip_mgmt}}/{{as3_declare_api}}"
+   method: "POST"
+   body: "{{(lookup('file','{{app_template}}.json'))}}"
+   headers:
+    X-F5-Auth-Token: "{{auth_token}}"
+   body_format: json
+   status_code:
+   - 200
+   return_content: true
+   validate_certs: no
+  register: app_stats
+  when: not delete_app is defined
+
+
+- name: Show apps status when deploy
+  debug: 
+    msg: "{{ app_stats.json.results[0] }}"
+  when: not delete_app is defined
+    #msg: "{{ app_stats }}"
+  #when: (app_stats.json.results[0].code == 200 and app_stats.json.results[0].message == "success")
+
+
+# ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin -e delete_app=true -e app_name=foobz02
+- name: Delete AS3 template
+  uri:
+   url: "https://{{bigip_mgmt}}/{{as3_declare_api}}/{{app_name}}"
+   method: "DELETE"
+   headers:
+    X-F5-Auth-Token: "{{auth_token}}"
+   body_format: json
+   status_code:
+   - 200
+   return_content: true
+   validate_certs: no
+  register: app_stats
+  when: delete_app is defined and delete_app
+  #when: delete_app is defined and delete_app | default("false") | match("true")
+
+- name: Show apps status when delete
+  debug: 
+    msg: "{{ app_stats.json.results[0] }}"
+  when: delete_app is defined and delete_app
+ 

@@ -1,0 +1,3 @@
+---
+# defaults file for tmos-as3-apps
+as3_declare_api: "mgmt/shared/appsvcs/declare"

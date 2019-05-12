@@ -1,0 +1,23 @@
+---
+# tasks file for tmos-as3-generate-token
+
+- name: Get Auth token
+  uri:
+   url: "https://{{bigip_mgmt}}/mgmt/shared/authn/login"
+   method: "POST"
+   body:
+     username: "{{username}}"
+     password: "{{password}}"
+     loginProviderName: "tmos"
+   body_format: json
+   return_content: yes
+   status_code: 200
+   validate_certs: false
+  register: auth_token
+
+- name: Display auth_token
+  debug: msg={{auth_token.json.token.token}}
+
+- name: Copy auth_token to a variable
+  set_fact:
+   auth_token: "{{auth_token.json.token.token}}"
