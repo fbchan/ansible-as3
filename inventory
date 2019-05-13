@@ -17,4 +17,4 @@
 localhost
 
 [bigip_mgmt]
-10.10.14.94
+bigip_mgmt
