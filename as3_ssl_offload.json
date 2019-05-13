@@ -1,0 +1,144 @@
+{
+  "class": "AS3",
+  "action": "deploy",
+  "persist": true,
+  "declaration": {
+    "class": "ADC",
+    "schemaVersion": "3.11.0",
+    "id": "test1",
+    "label": "test1",
+    "remark": "Declaration with SSL Offload",
+    "test1": {
+      "class": "Tenant",
+      "test1_apps": {
+        "class": "Application",
+        "template": "https",
+        "serviceMain": {
+          "class": "Service_HTTPS",
+          "virtualAddresses": [
+            "1.1.1.10"
+          ],
+          "pool": "test1_apps_pool",
+          "serverTLS": "test1_apps_webtls",
+        },
+        "test1_apps_pool": {
+          "class": "Pool",
+          "loadBalancingMode": "round-robin",
+          "monitors": [
+            "http"
+          ],
+          "members": [
+            {
+              "servicePort": 30002,
+              "shareNodes": true,
+              "serverAddresses": [
+                    "35.178.211.14",
+                    "34.254.226.74",
+                
+              ]
+            }
+          ]
+        },
+        "test1_apps_webtls": {
+          "class": "TLS_Server",
+          "certificates": [
+            {
+              "certificate": "test1_webcert"
+            }
+          ]
+        },
+        "test1_webcert": {
+          "class": "Certificate",
+          "remark": "in practice we recommend using a passphrase",
+          "certificate": "-----BEGIN CERTIFICATE-----
+MIIFVDCCBDygAwIBAgISBMHrFuCZ9xdfx7CGRhqDgV8nMA0GCSqGSIb3DQEBCwUA
+MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD
+ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0xOTA0MjYwMTAyNDRaFw0x
+OTA3MjUwMTAyNDRaMBkxFzAVBgNVBAMMDiouZm9vYnouY29tLmF1MIIBIjANBgkq
+hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAubkl9rkQZISib+NYK2sqWL7kedtzysNI
+ci4N/FF+9MP1a0Ox9ordZjTKMO0A4xGh8E1DLdI8zyVqy8Kb9gAy5qBUGaAVrhZW
+vozgdd1T7ionS4RLMzMOyZxls1FnJQ9L48nHM8xWioyNc6kU10CfOCr6SNN3/08K
+6T3IhzgcoAFwlEa3tTbNJLFA5t65W8seJXWaelixVtK9z0Q4vTjQfDi2DvY8fywb
+ix5C9B4Y3QLOHN/entbQkRNY5FTy210d05ENex/XiCY05UmGfAldbrL1dwm53fHX
+540gETAgUe+35qLyeNKIJefmVVOD2QtpEDCdyH5s/Mf1Uf+yAtE0HQIDAQABo4IC
+YzCCAl8wDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEF
+BQcDAjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRLCXIshSWz7oyZzrSyqdq9WpZt
+tTAfBgNVHSMEGDAWgBSoSmpjBH3duubRObemRWXv86jsoTBvBggrBgEFBQcBAQRj
+MGEwLgYIKwYBBQUHMAGGImh0dHA6Ly9vY3NwLmludC14My5sZXRzZW5jcnlwdC5v
+cmcwLwYIKwYBBQUHMAKGI2h0dHA6Ly9jZXJ0LmludC14My5sZXRzZW5jcnlwdC5v
+cmcvMBkGA1UdEQQSMBCCDiouZm9vYnouY29tLmF1MEwGA1UdIARFMEMwCAYGZ4EM
+AQIBMDcGCysGAQQBgt8TAQEBMCgwJgYIKwYBBQUHAgEWGmh0dHA6Ly9jcHMubGV0
+c2VuY3J5cHQub3JnMIIBBAYKKwYBBAHWeQIEAgSB9QSB8gDwAHYAb1N2rDHwMRnY
+mQCkURX/dxUcEdkCwQApBo2yCJo32RMAAAFqV2FwuAAABAMARzBFAiBUSpJeVFUG
+9aLWCm2/amPAW1CRj1/MUNp8w8eGVofP8gIhAIVunhBhYRLjUJGns8Fqbpa5xwjM
+NLHUpPBvAhLiJ4SrAHYAKTxRllTIOWW6qlD8WAfUt2+/WHopctykwwz05UVH9HgA
+AAFqV2FwqAAABAMARzBFAiBdxVSMurYxZzu/mme979vkxvT8fm32QrmDFFr56wHt
+1AIhAN6eTAi4835+VZ25PudLF31H71tbJ28FzgKiMucEnTyZMA0GCSqGSIb3DQEB
+CwUAA4IBAQAoc2V+1OW/MOdKJD2+ZCBAaVEDmAPe4m7bBnzxzYyBucCLXaV3igbh
+GzFk7Et+r6VVQAEbMLVYd22Lf5yxZQafW2mr2DfEUWKqZTn43vru+SO5KHEjFnbd
+yWLViA1crvBi8daEcVP3h3fWh6Is2XqLf45ZqP0mUkBbpaacASh86pabFaDiu5ar
+IWmPnJhCw5WzoNtkdy9RhBOrZWOvOIHh3xVHbYcpLM0EnGP4vVWsfETswTqHCMqk
+KmBoalbaCyG9bnY+uipNom9RfqCgdeiyzSGBtzE99mrED/iwi5WYZ6wNaJIitTM6
+yvhtS8lJzsq6eIYW/n0nsPaVhgbosxqb
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIEkjCCA3qgAwIBAgIQCgFBQgAAAVOFc2oLheynCDANBgkqhkiG9w0BAQsFADA/
+MSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT
+DkRTVCBSb290IENBIFgzMB4XDTE2MDMxNzE2NDA0NloXDTIxMDMxNzE2NDA0Nlow
+SjELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUxldCdzIEVuY3J5cHQxIzAhBgNVBAMT
+GkxldCdzIEVuY3J5cHQgQXV0aG9yaXR5IFgzMIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEAnNMM8FrlLke3cl03g7NoYzDq1zUmGSXhvb418XCSL7e4S0EF
+q6meNQhY7LEqxGiHC6PjdeTm86dicbp5gWAf15Gan/PQeGdxyGkOlZHP/uaZ6WA8
+SMx+yk13EiSdRxta67nsHjcAHJyse6cF6s5K671B5TaYucv9bTyWaN8jKkKQDIZ0
+Z8h/pZq4UmEUEz9l6YKHy9v6Dlb2honzhT+Xhq+w3Brvaw2VFn3EK6BlspkENnWA
+a6xK8xuQSXgvopZPKiAlKQTGdMDQMc2PMTiVFrqoM7hD8bEfwzB/onkxEz0tNvjj
+/PIzark5McWvxI0NHWQWM6r6hCm21AvA2H3DkwIDAQABo4IBfTCCAXkwEgYDVR0T
+AQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAYYwfwYIKwYBBQUHAQEEczBxMDIG
+CCsGAQUFBzABhiZodHRwOi8vaXNyZy50cnVzdGlkLm9jc3AuaWRlbnRydXN0LmNv
+bTA7BggrBgEFBQcwAoYvaHR0cDovL2FwcHMuaWRlbnRydXN0LmNvbS9yb290cy9k
+c3Ryb290Y2F4My5wN2MwHwYDVR0jBBgwFoAUxKexpHsscfrb4UuQdf/EFWCFiRAw
+VAYDVR0gBE0wSzAIBgZngQwBAgEwPwYLKwYBBAGC3xMBAQEwMDAuBggrBgEFBQcC
+ARYiaHR0cDovL2Nwcy5yb290LXgxLmxldHNlbmNyeXB0Lm9yZzA8BgNVHR8ENTAz
+MDGgL6AthitodHRwOi8vY3JsLmlkZW50cnVzdC5jb20vRFNUUk9PVENBWDNDUkwu
+Y3JsMB0GA1UdDgQWBBSoSmpjBH3duubRObemRWXv86jsoTANBgkqhkiG9w0BAQsF
+AAOCAQEA3TPXEfNjWDjdGBX7CVW+dla5cEilaUcne8IkCJLxWh9KEik3JHRRHGJo
+uM2VcGfl96S8TihRzZvoroed6ti6WqEBmtzw3Wodatg+VyOeph4EYpr/1wXKtx8/
+wApIvJSwtmVi4MFU5aMqrSDE6ea73Mj2tcMyo5jMd6jmeWUHK8so/joWUoHOUgwu
+X4Po1QYz+3dszkDqMp4fklxBwXRsW10KXzPMTZ+sOPAveyxindmjkW8lGy+QsRlG
+PfZ+G6Z6h7mjem0Y+iWlkYcV4PIWL1iwBi8saCbGS5jN2p8M+X+Q7UNKEkROb3N6
+KOqkqm57TH2H3eDJAkSnh6/DNFu0Qg==
+-----END CERTIFICATE-----
+",
+          "privateKey": "-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC5uSX2uRBkhKJv
+41graypYvuR523PKw0hyLg38UX70w/VrQ7H2it1mNMow7QDjEaHwTUMt0jzPJWrL
+wpv2ADLmoFQZoBWuFla+jOB13VPuKidLhEszMw7JnGWzUWclD0vjycczzFaKjI1z
+qRTXQJ84KvpI03f/TwrpPciHOBygAXCURre1Ns0ksUDm3rlbyx4ldZp6WLFW0r3P
+RDi9ONB8OLYO9jx/LBuLHkL0HhjdAs4c396e1tCRE1jkVPLbXR3TkQ17H9eIJjTl
+SYZ8CV1usvV3Cbnd8dfnjSARMCBR77fmovJ40ogl5+ZVU4PZC2kQMJ3Ifmz8x/VR
+/7IC0TQdAgMBAAECggEBAKrEHa8MnJEAD2d3j2NkxuwQoX2WFZLTGjK6O+vLd0NR
+RsAY33JEXqwST/LKiK1AUjjkoadpDracveSajNKVfjfmJU3mjuih66KLX/ufxQNQ
+yQ67lnV+NdOUtUI6z+8YcHwC1OHAubXs5Eb7qYj+BygbBESgBE7A+9RYFaCXLGLF
+PXM7oxAE8H2cUD3KsthRO4mDBxwyrYP7obwuZSBsNkcOhyC1SstcJLrobskFV8ro
+F/dFV9pfJtk5FRRzyg5zHyAk8a2fTR4wvsj9ijP6ddsOH9JW0gRYmGZdyi/rQ0/z
+UqXCMdEEATnvGrv3oN69vjOE9KUHs3vAFwRJ72q0NOECgYEA7w+WT9cW02YS4gSZ
+gZIyKfR1DjBoGXnJFUSsWL4LPmSXZSQsJwVvbdAbMAtSYdgxU/XA/6qNlY5M+n99
+4kL5wwgcEMuAryAa4JKUAvQBQ58Bxl62oLvyzCcY0OVfZiqt5/0p2zzcO8EcwLM3
+w7Z057708xwX00t4QlI/ZKu+34kCgYEAxuIMyvlgv2Zk+fKIgjwxCUBf20ou0MEV
+RkUU4XetGBECAMRmU6a7OJhr4rs8dB6NBj5/cYF6rhv0e6iKwRL0s0TxHqUOY3+i
+w/DGc3hyKlBZPFBYNi6h6BmXic22hKuU0D43D5CqgMJFuJ7u8JpLcRISkDx0s9+G
+xXKqFr8TlvUCgYEA5kYFa/KrsgXoun3jv8OrPm6TMo++Novw/eOgf/rPqdILYwls
+3kmGBCkphyXgvQ8atN1MgvkuWJkx3TlhcMlC/HKbVjIwSoCKYzfOCuovLYvEkeg5
+0qo4Ph6K8O2A71C9I3HhF6WQHp7tq1D2rjbadUCjgmnVKVrRBFFlbvtgaMECgYBU
+nZpJxT33UO5HNXwExO0r/XqLBw3R/UQ66GtQ3iUD50CN6QGMN5TSKG9GQNkgolrn
+vDFmrmruprAm6HdYW+NGXl+j5R+xD33FlawpNqaEADlnItvU+ZQi9rh1hdNQsNuY
+mc+9TJRuQbl+KgiIz2ynh8PkIASa/tANM5LQKK2B/QKBgDfuoKaOKaA6UXhR0MfE
+lNXN/7tw/6dlGNTpic4x0Cm2jNyjIhUuVfEinNSVd1v8IhyJ6zyALbnUo1EixbB2
+5l/Toy7udyh+S0yZPGXkgYnu+vX7DexGdqxAqcabUwYKRD7PbYjrJaRryPrdMX8u
+wYeeFXF3p0dvqZ2Bki0GBHkI
+-----END PRIVATE KEY-----
+"        }
+      }
+    }
+  }
+}

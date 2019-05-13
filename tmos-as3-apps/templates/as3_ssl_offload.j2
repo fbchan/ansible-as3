@@ -1,0 +1,58 @@
+{
+  "class": "AS3",
+  "action": "deploy",
+  "persist": true,
+  "declaration": {
+    "class": "ADC",
+    "schemaVersion": "{{as3_schemaversion}}",
+    "id": "{{app_name}}",
+    "label": "{{app_name}}",
+    "remark": "Declaration with SSL Offload",
+    "{{app_name}}": {
+      "class": "Tenant",
+      "{{app_name}}_apps": {
+        "class": "Application",
+        "template": "https",
+        "serviceMain": {
+          "class": "Service_HTTPS",
+          "virtualAddresses": [
+            "{{app_vs}}"
+          ],
+          "pool": "{{app_name}}_apps_pool",
+          "serverTLS": "{{app_name}}_apps_webtls",
+        },
+        "{{app_name}}_apps_pool": {
+          "class": "Pool",
+          "loadBalancingMode": "round-robin",
+          "monitors": [
+            "http"
+          ],
+          "members": [
+            {
+              "servicePort": {{app_service_port}},
+              "shareNodes": true,
+              "serverAddresses": [
+    {% for member in app_member_addr %}
+                "{{member.ip_address}}",
+    {% endfor %}            
+              ]
+            }
+          ]
+        },
+        "{{app_name}}_apps_webtls": {
+          "class": "TLS_Server",
+          "certificates": [
+            {
+              "certificate": "{{app_name}}_webcert"
+            }
+          ]
+        },
+        "{{app_name}}_webcert": {
+          "class": "Certificate",
+          "remark": "in practice we recommend using a passphrase",
+          "certificate": "{{app_cert}}",
+          "privateKey": "{{app_privatekey}}"        }
+      }
+    }
+  }
+}
