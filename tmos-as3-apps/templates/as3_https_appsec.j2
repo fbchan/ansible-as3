@@ -38,7 +38,9 @@
           "members": [
             {
               "servicePort": {{app_service_port}},
-              "shareNodes": true,
+              {% if shareNodes is sameas true %}
+                  "shareNodes": true,
+              {% endif %}
               "serverAddresses": [
     {% for member in app_member_addr %}
                 "{{member.ip_address}}",

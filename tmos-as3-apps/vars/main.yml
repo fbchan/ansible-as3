@@ -31,6 +31,8 @@ app_member_addr:
 - member2:
   ip_address: "34.254.226.74"
 
+shareNodes: false
+
 app_member_sd:
 - discovered_addr1:
   service_port: 8080
