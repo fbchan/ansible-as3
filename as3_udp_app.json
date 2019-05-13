@@ -1,0 +1,43 @@
+{
+  "class": "AS3",
+  "action": "deploy",
+  "declaration": {
+    "class": "ADC",
+    "schemaVersion": "3.11.0",
+    "id": "test1",
+    "label": "test1",
+    "remark": "Declaration for UDP Load Balancer Service",
+    "test1": {
+      "class": "Tenant",
+      "test1_udp_apps": {
+        "class": "Application",
+        "template": "udp",
+        "serviceMain": {
+          "class": "Service_UDP",
+          "virtualPort": 514,
+          "virtualAddresses": [
+            "1.1.1.10"
+          ],
+          "pool": "test1_udp_pool"
+        },
+        "test1_udp_pool": {
+          "class": "Pool",
+          "monitors": [
+            "icmp"
+          ],
+          "members": [
+            {
+              "servicePort": 514,
+                                "shareNodes": true,
+                            "serverAddresses": [
+                    "35.178.211.14",
+                    "34.254.226.74",
+                
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+ }

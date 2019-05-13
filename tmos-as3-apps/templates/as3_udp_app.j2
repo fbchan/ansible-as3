@@ -1,0 +1,45 @@
+{
+  "class": "AS3",
+  "action": "deploy",
+  "declaration": {
+    "class": "ADC",
+    "schemaVersion": "{{as3_schemaversion}}",
+    "id": "{{app_name}}",
+    "label": "{{app_name}}",
+    "remark": "Declaration for UDP Load Balancer Service",
+    "{{app_name}}": {
+      "class": "Tenant",
+      "{{app_name}}_udp_apps": {
+        "class": "Application",
+        "template": "udp",
+        "serviceMain": {
+          "class": "Service_UDP",
+          "virtualPort": {{ app_virtual_port }},
+          "virtualAddresses": [
+            "{{app_vs}}"
+          ],
+          "pool": "{{app_name}}_udp_pool"
+        },
+        "{{app_name}}_udp_pool": {
+          "class": "Pool",
+          "monitors": [
+            "icmp"
+          ],
+          "members": [
+            {
+              "servicePort": {{app_service_port}},
+              {% if shareNodes is sameas true %}
+                  "shareNodes": true,
+              {% endif %}
+              "serverAddresses": [
+    {% for member in app_member_addr %}
+                "{{member.ip_address}}",
+    {% endfor %}            
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+ }

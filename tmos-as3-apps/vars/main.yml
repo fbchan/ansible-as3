@@ -4,9 +4,9 @@
 app_template: "as3_https_appsec"
 # Template Options
 # as3_https_appsec
-# as3_https_waf_sd
-# as3_https_offload_app
-# as3_http_only_app
+# as3_ssl_offload
+# as3_https_appsec_sd
+# as3_ssl_offload_sd
 # as3_udp_app
 # as3_tcp_app
 
