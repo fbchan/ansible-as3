@@ -28,7 +28,7 @@ ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=a
 -e app_service_port:30002 \
 -e '{"app_member_addr":[{"member1":"null","ip_address":"1.1.1.1"},{"member2":"null","ip_address":"2.2.2.2"}]}'
 
-Exaple Output
+Example Output
 =============
 PLAY [Deploy AS3 Apps] ********************************************************************************************************************************************
 
