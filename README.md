@@ -2,6 +2,7 @@
 Ansible roles to provision application services with AS3 (working in progress)
 
 Example Playbook
+=================
 tmos-bigip-as3.yml
 ---
     - name: Deploy AS3 Apps
@@ -72,8 +73,29 @@ TASK [tmos-as3-apps : Show apps status when delete] ****************************
 skipping: [bigip_mgmt]
 
 PLAY RECAP ********************************************************************************************************************************************************
+
 bigip_mgmt                 : ok=6    changed=1    unreachable=0    failed=0
 
 
+Example using AS3 SSL Offload Template with shareNodes enabled
+==========================================================
+ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \
+> -e bigip_mgmt=10.10.14.94 \
+> -e app_name=demo2 \
+> -e app_template=as3_ssl_offload \
+> -e app_vs=1.1.1.12 \
+> -e app_service_port:30002 \
+> -e '{"app_member_addr":[{"member1":"null","ip_address":"3.2.2.2"},{"member2":"null","ip_address":"4.3.3.3"}]}' \
+> -e '{"shareNodes": true}'
 
-
+Example using AS3 UDP load balancing
+====================================
+ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \
+-e bigip_mgmt=10.10.14.94 \
+-e app_name=demo3 \
+-e app_template=as3_udp_app \
+-e app_vs=1.1.1.13 \
+-e app_service_port=514 \
+-e app_virtual_port=514 \
+-e '{"app_member_addr":[{"member1":"null","ip_address":"3.3.3.3"},{"member2":"null","ip_address":"3.3.3.4"}]}' \
+-e '{"shareNodes": true}'

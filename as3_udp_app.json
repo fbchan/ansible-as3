@@ -4,23 +4,23 @@
   "declaration": {
     "class": "ADC",
     "schemaVersion": "3.11.0",
-    "id": "test1",
-    "label": "test1",
+    "id": "demo3",
+    "label": "demo3",
     "remark": "Declaration for UDP Load Balancer Service",
-    "test1": {
+    "demo3": {
       "class": "Tenant",
-      "test1_udp_apps": {
+      "demo3_udp_apps": {
         "class": "Application",
         "template": "udp",
         "serviceMain": {
           "class": "Service_UDP",
           "virtualPort": 514,
           "virtualAddresses": [
-            "1.1.1.10"
+            "1.1.1.13"
           ],
-          "pool": "test1_udp_pool"
+          "pool": "demo3_udp_pool"
         },
-        "test1_udp_pool": {
+        "demo3_udp_pool": {
           "class": "Pool",
           "monitors": [
             "icmp"
@@ -30,8 +30,8 @@
               "servicePort": 514,
                                 "shareNodes": true,
                             "serverAddresses": [
-                    "35.178.211.14",
-                    "34.254.226.74",
+                    "3.3.3.3",
+                    "3.3.3.4",
                 
               ]
             }
