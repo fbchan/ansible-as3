@@ -1,5 +1,8 @@
 # ansible-as3
 Ansible roles to provision application services with AS3 (working in progress)
+Note:
+- Example leveraging ansible template + F5 Automation Toolchain (AS3)
+- Please modify jinja2 template to fit your requirement
 
 Example Playbook
 =================
