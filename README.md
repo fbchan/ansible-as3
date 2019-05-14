@@ -19,13 +19,13 @@ tmos-bigip-as3.yml
 Runs from CLI
 Deploy AS3 with SSL Offload + AWAF Policy
 ==========================================
-ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \
--e bigip_mgmt=10.10.14.94 \
--e app_name=demo2 \
--e app_template=as3_https_appsec \
--e app_vs=1.1.1.11 \
--e awaf_url=https://raw.githubusercontent.com/fbchan/waf-pol/master/awaf-owasp-top10.xml \
--e app_service_port:30002 \
+ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \\
+-e bigip_mgmt=10.10.14.94 \\
+-e app_name=demo2 \\
+-e app_template=as3_https_appsec \\
+-e app_vs=1.1.1.11 \\
+-e awaf_url=https://raw.githubusercontent.com/fbchan/waf-pol/master/awaf-owasp-top10.xml \\
+-e app_service_port:30002 \\
 -e '{"app_member_addr":[{"member1":"null","ip_address":"1.1.1.1"},{"member2":"null","ip_address":"2.2.2.2"}]}'
 
 Example Output
@@ -93,14 +93,14 @@ ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=a
 
 Example using AS3 UDP load balancing
 ====================================
-ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \
--e bigip_mgmt=10.10.14.94 \
--e app_name=demo3 \
--e app_template=as3_udp_app \
--e app_vs=1.1.1.13 \
--e app_service_port=514 \
--e app_virtual_port=514 \
--e '{"app_member_addr":[{"member1":"null","ip_address":"3.3.3.3"},{"member2":"null","ip_address":"3.3.3.4"}]}' \
+ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \\
+-e bigip_mgmt=10.10.14.94 \\
+-e app_name=demo3 \\
+-e app_template=as3_udp_app \\
+-e app_vs=1.1.1.13 \\
+-e app_service_port=514 \\
+-e app_virtual_port=514 \\
+-e '{"app_member_addr":[{"member1":"null","ip_address":"3.3.3.3"},{"member2":"null","ip_address":"3.3.3.4"}]}' \\
 -e '{"shareNodes": true}'
 
 
