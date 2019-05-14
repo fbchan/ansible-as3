@@ -102,3 +102,64 @@ ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=a
 -e app_virtual_port=514 \
 -e '{"app_member_addr":[{"member1":"null","ip_address":"3.3.3.3"},{"member2":"null","ip_address":"3.3.3.4"}]}' \
 -e '{"shareNodes": true}'
+
+
+Delete AS3 deployment
+=====================
+ansible-playbook tmos-bigip-as3.yml -i inventory -e username=admin -e password=admin \
+-e bigip_mgmt=10.10.14.94 \
+-e app_name=demo \
+-e delete_app=true
+
+Example Output
+==============
+PLAY [Deploy AS3 Apps] ********************************************************************************************************************************************
+
+
+TASK [tmos-as3-generate-token : Get Auth token] *******************************************************************************************************************
+
+ok: [bigip_mgmt]
+
+TASK [tmos-as3-generate-token : Display auth_token] ***************************************************************************************************************
+
+ok: [bigip_mgmt] => {
+    "msg": "M4ZJJ57OIRLYLE7BAJPKC2CBJF"
+}
+
+TASK [tmos-as3-generate-token : Copy auth_token to a variable] ****************************************************************************************************
+
+ok: [bigip_mgmt]
+
+TASK [tmos-as3-apps : Build JSON payload] *************************************************************************************************************************
+
+changed: [bigip_mgmt]
+
+TASK [tmos-as3-apps : Deploy AS3 template] ************************************************************************************************************************
+
+skipping: [bigip_mgmt]
+
+TASK [tmos-as3-apps : Show apps status when deploy] ***************************************************************************************************************
+
+skipping: [bigip_mgmt]
+
+TASK [tmos-as3-apps : Delete AS3 template] ************************************************************************************************************************
+
+ok: [bigip_mgmt]
+
+TASK [tmos-as3-apps : Show apps status when delete] ***************************************************************************************************************
+
+ok: [bigip_mgmt] => {
+    "msg": {
+        "code": 200,
+        "host": "localhost",
+        "lineCount": 18,
+        "message": "success",
+        "runTime": 6770,
+        "tenant": "demo"
+    }
+}
+
+PLAY RECAP ********************************************************************************************************************************************************
+
+bigip_mgmt                 : ok=6    changed=1    unreachable=0    failed=0
+

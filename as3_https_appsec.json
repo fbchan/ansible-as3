@@ -16,7 +16,7 @@
         "serviceMain": {
           "class": "Service_HTTPS",
           "virtualAddresses": [
-            "1.1.1.11"
+            "10.10.14.99"
           ],
           "pool": "demo2_apps_pool",
           "serverTLS": "demo2_apps_webtls",
@@ -39,8 +39,8 @@
             {
               "servicePort": 30002,
                             "serverAddresses": [
-                    "1.1.1.1",
-                    "2.2.2.2",
+                    "35.178.211.14",
+                    "34.254.226.74",
                 
               ]
             }
