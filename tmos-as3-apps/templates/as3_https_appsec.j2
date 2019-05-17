@@ -59,9 +59,9 @@
         },
         "{{app_name}}_webcert": {
           "class": "Certificate",
-          "remark": "in practice we recommend using a passphrase",
-          "certificate": "{{app_cert}}",
-          "privateKey": "{{app_privatekey}}"
+          "remark": "In practice we recommend using a passphrase",
+          "certificate": "{{app_cert | replace('\n', '\\n') }}",
+          "privateKey": "{{app_privatekey | replace('\n', '\\n') }}" 
         }
       }
     }
