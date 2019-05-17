@@ -1,0 +1,5 @@
+{
+   "command":"run",
+   "utilCmdArgs":"-c \"echo arr foobz.com.au. app1.foobz.com.au. 150 A 203.134.121.83 | zrsh\""
+
+}

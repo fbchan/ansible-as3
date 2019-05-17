@@ -1,0 +1,10 @@
+---
+# vars file for tmos-dns
+
+dns_template: "dns"
+
+zone: foobz.com.au
+
+fqdn: app1.foobz.com.au
+
+ip_addr: 203.134.121.83

@@ -8,3 +8,4 @@
       roles:
        - tmos-as3-generate-token
        - tmos-as3-apps
+       #- tmos-dns

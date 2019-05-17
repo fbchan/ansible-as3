@@ -1,0 +1,19 @@
+---
+# tasks file for tmos-dns
+
+- name: Build JSON payload
+  template: src={{dns_template}}.j2 dest={{dns_template}}.json
+
+- name: Create Resource Record
+  uri:
+   url: "https://{{bigip_mgmt}}/{{tmos_api}}"
+   method: "POST"
+   body: "{{(lookup('file','{{app_template}}.json'))}}"
+   headers:
+    X-F5-Auth-Token: "{{auth_token}}"
+   body_format: json
+   status_code:
+   - 200
+   return_content: true
+   validate_certs: no
+  register: dns_stats

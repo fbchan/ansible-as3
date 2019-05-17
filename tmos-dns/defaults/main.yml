@@ -1,0 +1,5 @@
+---
+# defaults file for tmos-dns
+
+tmos_api: "mgmt/tm/util/bash"
+
