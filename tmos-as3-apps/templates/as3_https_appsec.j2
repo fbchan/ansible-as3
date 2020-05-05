@@ -12,12 +12,14 @@
       "class": "Tenant",
       "{{app_name}}_apps": {
         "class": "Application",
-        "template": "https",
-        "serviceMain": {
+        "template": "generic",
+        "vs_{{app_name}}": {
           "class": "Service_HTTPS",
           "virtualAddresses": [
             "{{app_vs}}"
           ],
+          "virtualPort": 443,
+          "redirect80": false,
           "pool": "{{app_name}}_apps_pool",
           "serverTLS": "{{app_name}}_apps_webtls",
           "policyWAF": {
