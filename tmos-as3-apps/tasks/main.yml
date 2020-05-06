@@ -18,6 +18,7 @@
    - 200
    return_content: true
    validate_certs: no
+   timeout: 80
   register: app_stats
   when: not delete_app is defined
 
